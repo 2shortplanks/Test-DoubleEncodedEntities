@@ -1,25 +1,22 @@
 package Test::DoubleEncodedEntities;
+use base qw(Exporter);
 
+use 5.006;
 use strict;
 use warnings;
 
 use HTML::TokeParser::Simple;
 use Test::DoubleEncodedEntities::Entities;
 use Test::Builder;
-require Exporter;
 
-use vars qw(@EXPORT @ISA $VERSION);
-@EXPORT = qw(ok_dee);
-@ISA = qw(Exporter);
-
-$VERSION = "0.01";
+our @EXPORT;
+our $VERSION = "0.01";
 
 my $Tester = Test::Builder->new();
 
 my $entities = join "|", @entities;
 
-sub ok_dee
-{
+sub ok_dee {
   my $input = shift;
   my $name  = shift || "double encoded entity test";
 
@@ -31,8 +28,7 @@ sub ok_dee
 
   # search all text bits for problems
   my %oops;
-  while ( my $token = $p->get_token )
-  {
+  while ( my $token = $p->get_token ) {
     next unless $token->is_text;
     my $string = $token->as_is;
 
@@ -41,17 +37,20 @@ sub ok_dee
   }
 
   # did we get away okay?
-  unless(%oops)
-    { return $Tester->ok(1,$name) }
+  unless(%oops) {
+    return $Tester->ok(1,$name)
+  }
 
   # report the problem
   $Tester->ok(0, $name);
-  foreach (sort { $a cmp $b } keys %oops)
-   { $Tester->diag(qq{Found $oops{$_} "&amp;$_;"\n}) }
+  foreach (sort { $a cmp $b } keys %oops) {
+    $Tester->diag(qq{Found $oops{$_} "&amp;$_;"\n})
+  }
 
   # return 0 as we got an error
   return 0;
 }
+push @EXPORT, "ok_dee";
 
 =head1 NAME
 
