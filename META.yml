@@ -1,0 +1,18 @@
+--- #YAML:1.0
+name: Test-DoubleEncodedEntities
+version: 0.01
+author: ~
+abstract: check for double encoded entities
+license: perl
+requires:
+  HTML::TokeParser::Simple: 0
+  Test::Builder: 0.15
+build_requires:
+  Test::Builder::Tester: 1.01
+provides:
+  Test::DoubleEncodedEntities:
+    file: lib/Test/DoubleEncodedEntities.pm
+    version: 0.01
+  Test::DoubleEncodedEntities::Entities:
+    file: lib/Test/DoubleEncodedEntities/Entities.pm
+generated_by: Module::Build version 0.25
