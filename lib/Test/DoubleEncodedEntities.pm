@@ -5,13 +5,13 @@ use 5.006;
 use strict;
 use warnings;
 
-use HTML::TokeParser::Simple;
-use Test::DoubleEncodedEntities::Entities;
-use Test::Builder;
-
 our @EXPORT;
 our $VERSION = "0.01";
 
+use HTML::TokeParser::Simple;
+use Test::DoubleEncodedEntities::Entities;
+
+use Test::Builder;
 my $Tester = Test::Builder->new();
 
 my $entities = join "|", @entities;
