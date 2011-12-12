@@ -24,7 +24,7 @@ sub ok_dee
   my $name  = shift || "double encoded entity test";
 
   # parse the input
-  my $p = HTML::TokeParser::Simple->new( doc => $input )
+  my $p = HTML::TokeParser::Simple->new( \$input )
    or die "Can't parse input";
 
   $p->unbroken_text(1);
