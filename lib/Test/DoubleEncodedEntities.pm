@@ -11,8 +11,10 @@ our $VERSION = "0.01";
 use HTML::TokeParser::Simple;
 use Test::DoubleEncodedEntities::Entities;
 
+use Carp qw(croak);
+
 use Test::Builder;
-my $Tester = Test::Builder->new();
+my $tester = Test::Builder->new();
 
 my $entities = join "|", @entities;
 
@@ -22,7 +24,7 @@ sub ok_dee {
 
   # parse the input
   my $p = HTML::TokeParser::Simple->new( \$input )
-   or die "Can't parse input";
+   or croak "Can't parse input";
 
   $p->unbroken_text(1);
 
@@ -33,18 +35,18 @@ sub ok_dee {
     my $string = $token->as_is;
 
     # look for bad entities
-    $oops{$_}++ foreach $string =~ m/&amp;($entities|#\d+);/go;
+    $oops{$_}++ foreach $string =~ m/&amp;($entities|\#\d+);/gox;
   }
 
   # did we get away okay?
   unless(%oops) {
-    return $Tester->ok(1,$name)
+    return $tester->ok(1,$name)
   }
 
   # report the problem
-  $Tester->ok(0, $name);
+  $tester->ok(0, $name);
   foreach (sort { $a cmp $b } keys %oops) {
-    $Tester->diag(qq{Found $oops{$_} "&amp;$_;"\n})
+    $tester->diag(qq{Found $oops{$_} "&amp;$_;"\n})
   }
 
   # return 0 as we got an error
@@ -79,12 +81,23 @@ purpose in things like URLs.
 This module knows about all the entities defined in the HTML 4.0
 specification, and numerical entities.
 
+=head1 BUGS
+
+Bugs (and requests for new features) can be reported though the CPAN
+RT system:
+L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-DoubleEncodedEntities>
+
+Alternatively, you can simply fork this project on github and
+send me pull requests.  Please see L<http://github.com/2shortplanks/Test-DoubleEncodedEntities>
+
 =head1 AUTHOR
 
-  Copyright Mark Fowler 2004.  All rights reserved.
+Written by Mark Fowler B<mark@twoshortplanks.com>
 
-  This program is free software; you can redistribute it
-  and/or modify it under the same terms as Perl itself.
+Copyright Mark Fowler 2004, 2011.
+
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
