@@ -6,7 +6,7 @@ use strict;
 use warnings;
 
 our @EXPORT;
-our $VERSION = "0.01";
+our $VERSION = "2.00";
 
 use HTML::TokeParser::Simple;
 use Test::DoubleEncodedEntities::Entities;
@@ -67,21 +67,29 @@ Test::DoubleEncodedEntities - check for double encoded entities
 
 =head1 DESCRIPTION
 
-This is a testing module that checks for double encoded entities
-in your string.  It exports one function ok_dee that does
-the testing.  You should pass it the html you want to test
-and optionally the name for the test.  It will run the test
-producing B<Test::Harness> compatible output, and will return
-1 on a pass and 0 on a failure.
+This testing module huristically checks for double
+encoded HTML entities in your string.
 
-Note that this only checks the body text;  Entities in attributes
-are ignored as often you may want to double encoded entities on
-purpose in things like URLs.
+=head2 Functions
+
+This module automatically exports the following function:
+
+=over
+
+=item ok_dee($string)
+
+=item ok_dee($string, $test_description)
 
 This module knows about all the entities defined in the HTML 4.0
 specification, and numerical entities.
 
+=back
+
 =head1 BUGS
+
+This module only checks the body text;  Entities in attributes
+are ignored as often you may want to double encoded entities on
+purpose in things like URLs.
 
 Bugs (and requests for new features) can be reported though the CPAN
 RT system:
