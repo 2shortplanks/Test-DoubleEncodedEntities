@@ -64,7 +64,9 @@ These are:
 
 =over 
 
-@{[ map { "=item $_\n\n"} @ent ]}=back
+@{[ join "\n\n", map { "=item $_"} @ent ]}
+
+=back
 
 =head1 AUTHOR
 
