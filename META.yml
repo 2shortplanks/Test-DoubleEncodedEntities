@@ -1,18 +1,27 @@
---- #YAML:1.0
-name: Test-DoubleEncodedEntities
-version: 0.01
-author: ~
-abstract: check for double encoded entities
-license: perl
-requires:
-  HTML::TokeParser::Simple: 0
-  Test::Builder: 0.15
+---
+abstract: 'check for double encoded entities'
+author:
+  - 'Written by Mark Fowler B<mark@twoshortplanks.com>'
 build_requires:
-  Test::Builder::Tester: 1.01
-provides:
-  Test::DoubleEncodedEntities:
-    file: lib/Test/DoubleEncodedEntities.pm
-    version: 0.01
-  Test::DoubleEncodedEntities::Entities:
-    file: lib/Test/DoubleEncodedEntities/Entities.pm
-generated_by: Module::Build version 0.25
+  ExtUtils::MakeMaker: 6.42
+  Test::Builder::Tester: 0.09
+configure_requires:
+  ExtUtils::MakeMaker: 6.42
+distribution_type: module
+generated_by: 'Module::Install version 1.00'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Test-DoubleEncodedEntities
+no_index:
+  directory:
+    - inc
+    - t
+    - xt
+requires:
+  HTML::TokeParser::Simple: 3.15
+  perl: 5.6.0
+resources:
+  license: http://dev.perl.org/licenses/
+version: 2.00
