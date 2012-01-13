@@ -35,7 +35,7 @@ sub ok_dee {
     my $string = $token->as_is;
 
     # look for bad entities
-    $oops{$_}++ foreach $string =~ m/&amp;($entities|\#\d+);/gox;
+    $oops{$_}++ foreach $string =~ m/(&(?:amp|\#0*38);(?:$entities|\#\d+);)/gox;
   }
 
   # did we get away okay?
@@ -46,7 +46,7 @@ sub ok_dee {
   # report the problem
   $tester->ok(0, $name);
   foreach (sort { $a cmp $b } keys %oops) {
-    $tester->diag(qq{Found $oops{$_} "&amp;$_;"\n})
+    $tester->diag(qq{Found $oops{$_} "$_"\n})
   }
 
   # return 0 as we got an error
@@ -80,8 +80,8 @@ This module automatically exports the following function:
 
 =item ok_dee($string, $test_description)
 
-This module knows about all the entities defined in the HTML 4.0
-specification, and numerical entities.
+This module knows about all the entities defined in the HTML5
+working draft and numerical entities.
 
 =back
 
@@ -102,7 +102,7 @@ send me pull requests.  Please see L<http://github.com/2shortplanks/Test-DoubleE
 
 Written by Mark Fowler B<mark@twoshortplanks.com>
 
-Copyright Mark Fowler 2004, 2011.
+Copyright Mark Fowler 2004, 2011, 2012.
 
 This program is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
