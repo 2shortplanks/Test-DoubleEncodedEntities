@@ -3,5 +3,6 @@
       Move to Module::Install
       Improve documentation
       Switch to HTML5 entities
+      Recognised double encoded entities encoded with &#38;
 
 1.01  Yet Another CPAN Release
