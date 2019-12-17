@@ -1,6 +1,4 @@
-Build.PL
 CHANGES
-create_deee.pl
 create_deee/create_deee.pl
 create_deee/named-character-references.html
 inc/Module/Install.pm
